@@ -7,6 +7,8 @@ CleanArchitecture.Core.Entities/bin
 
 CleanArchitecture.Web.Controllers/obj
 CleanArchitecture.Web.Controllers/bin
+
+.vs
 packages
 # Compiled source #
 ###################
