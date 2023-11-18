@@ -1,5 +1,4 @@
 using CleanArchitecture.Application;
-using Microsoft.AspNetCore.Builder;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -13,8 +12,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ITeamUseCase, TeamUseCase>();
 builder.Services.AddCors();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.AllowAnyHeader();
+                          policy.AllowAnyOrigin();
+                      });
+});
 var app = builder.Build();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
